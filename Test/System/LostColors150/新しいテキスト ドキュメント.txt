@@ -1,0 +1,2 @@
+Game_Effect_FlyingNotes_EndPoint_X=1228,1228
+Game_Effect_FlyingNotes_EndPoint_Y=163,555

@@ -12,8 +12,8 @@ namespace TJAPlayer3
 		// プロパティ
 
 		protected long[] nスコアの増分;
-		protected double[] n現在の本当のスコア;
-		protected long[] n現在表示中のスコア;
+		protected　double[] n現在の本当のスコア;
+		protected　long[] n現在表示中のスコア;
 		//protected CTexture txScore;
 
   //      protected CTexture txScore_1P;
@@ -22,11 +22,11 @@ namespace TJAPlayer3
 
 		public CCounter[] ctボーナス加算タイマ;
 
-		protected STスコア[] stScore;
+		public STスコア[] stScore;
 		protected int n現在表示中のAddScore;
 
 		[StructLayout( LayoutKind.Sequential )]
-		protected struct STスコア
+		public struct STスコア
 		{
 			public bool b使用中;
 			public bool b表示中;
@@ -158,7 +158,7 @@ namespace TJAPlayer3
 						this.stScore[ i ].b使用中 = true;
 						this.stScore[ i ].b表示中 = true;
 						this.stScore[ i ].nAddScore = (int)delta;
-						this.stScore[ i ].ctTimer = new CCounter( 0, 500, 1, TJAPlayer3.Timer );
+						this.stScore[ i ].ctTimer = new CCounter( 0, 250, 1, TJAPlayer3.Timer );
 						this.stScore[ i ].bBonusScore = false;
 						this.stScore[ i ].nPlayer = player;
 						this.n現在表示中のAddScore++;
@@ -181,7 +181,7 @@ namespace TJAPlayer3
 						this.stScore[ i ].b使用中 = true;
 						this.stScore[ i ].b表示中 = true;
 						this.stScore[ i ].nAddScore = 10000;
-						this.stScore[ i ].ctTimer = new CCounter( 0, 400, 1, TJAPlayer3.Timer );
+						this.stScore[ i ].ctTimer = new CCounter( 0, 200, 1, TJAPlayer3.Timer );
 						this.stScore[ i ].bBonusScore = true;
 						this.stScore[ i ].nPlayer = player;
 						this.n現在表示中のAddScore++;
@@ -247,7 +247,7 @@ namespace TJAPlayer3
 			}
 		}
 
-		protected void t小文字表示( int x, int y, string str, int mode , int alpha, int player )
+		public void t小文字表示( int x, int y, string str, int mode , int alpha, int player )
 		{
 			foreach( char ch in str )
 			{

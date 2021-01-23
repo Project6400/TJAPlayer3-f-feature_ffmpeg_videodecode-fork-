@@ -737,6 +737,7 @@ namespace TJAPlayer3
 		public bool bJust;
 
 		public bool bEndingAnime = false;   // 2017.01.27 DD 「また遊んでね」画面の有効/無効オプション追加
+		public bool bForceEndingAnime = false;
 
 		public int nInputAdjustTimeMs;
 		public bool bIsAutoResultCapture;			// #25399 2011.6.9 yyagi リザルト画像自動保存機能のON/OFF制御
@@ -1003,7 +1004,7 @@ namespace TJAPlayer3
 			#endregion
 			this.nヒット範囲ms = new STRANGE();
 			this.nヒット範囲ms.Perfect = 25; //そこらへんから拾ってきた判定の値
-			this.nヒット範囲ms.Great = -1; //使用しません。
+			this.nヒット範囲ms.Great = -75; //使用しません。
 			this.nヒット範囲ms.Good = 75;
 			this.nヒット範囲ms.Poor = 108;
 			this.ConfigIniファイル名 = "";
@@ -1376,6 +1377,9 @@ namespace TJAPlayer3
 			sw.WriteLine( "; 「また遊んでね」画面(0:OFF, 1:ON)" );
 			sw.WriteLine( "EndingAnime={0}", this.bEndingAnime ? 1 : 0 );
 			sw.WriteLine();
+			sw.WriteLine("; 「また遊んでね」画面を強制的に表示させる(0:OFF, 1:ON)");
+			sw.WriteLine("ForceEndingAnime={0}", this.bForceEndingAnime ? 1 : 0);
+			sw.WriteLine();
 			sw.WriteLine( ";-------------------" );
 			#endregion
 
@@ -1399,6 +1403,7 @@ namespace TJAPlayer3
 			sw.WriteLine();
 			sw.WriteLine("; Perfect～Poor とみなされる範囲[ms]");
 			sw.WriteLine("Perfect={0}", this.nヒット範囲ms.Perfect);
+			sw.WriteLine("Great={0}", this.nヒット範囲ms.Great);
 			sw.WriteLine("Good={0}", this.nヒット範囲ms.Good);
 			sw.WriteLine("Poor={0}", this.nヒット範囲ms.Poor);
 			sw.WriteLine();
@@ -2024,7 +2029,10 @@ namespace TJAPlayer3
 											{
 												this.bEndingAnime = C変換.bONorOFF( str4[ 0 ] );
 											}
-
+											else if (str3.Equals("ForceEndingAnime"))
+											{
+												this.bForceEndingAnime = C変換.bONorOFF(str4[0]);
+											}
 											continue;
 										}
 									//-----------------------------

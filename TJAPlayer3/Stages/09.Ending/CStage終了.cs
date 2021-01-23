@@ -25,6 +25,7 @@ namespace TJAPlayer3
 
 		public override void On活性化()
 		{
+			this.voice終了画面 = new CSkin.Cシステムサウンド(@"Sounds\EndVoice.ogg", false, false, ESoundGroup.Voice);
 			Trace.TraceInformation( "終了ステージを活性化します。" );
 			Trace.Indent();
 			try
@@ -79,11 +80,16 @@ namespace TJAPlayer3
 				if( base.b初めての進行描画 )
 				{
 					TJAPlayer3.Skin.soundゲーム終了音.t再生する();
-					this.ctAnimation.t開始( 0, 2000, 1, TJAPlayer3.Timer );
+					this.voice終了画面.t再生する();
+					this.ctAnimation.t開始( 0, 1000, 1, TJAPlayer3.Timer );
 					base.b初めての進行描画 = false;
 				}
 				this.ctAnimation.t進行();
-				if (this.BackSurface != null)
+				if (TJAPlayer3.Tx.Exit_Background != null)
+				{
+					TJAPlayer3.Tx.Exit_Background.t2D描画(TJAPlayer3.app.Device, 0, 0);
+				}
+				/*	if (this.BackSurface != null)
 					this.BackSurface.t2D描画(TJAPlayer3.app.Device, 0, 0);
 
                 #region[幕のアニメーションの計算]
@@ -125,7 +131,7 @@ namespace TJAPlayer3
 
 				}
 				else if(TJAPlayer3.Tx.Exit_Background!=null)
-					TJAPlayer3.Tx.Exit_Background.t2D描画(TJAPlayer3.app.Device, x, 0);
+					TJAPlayer3.Tx.Exit_Background.t2D描画(TJAPlayer3.app.Device, x, 0);*/
 
 				if (this.ctAnimation.b終了値に達した && !TJAPlayer3.Skin.soundゲーム終了音.b再生中)
 				{
@@ -153,7 +159,8 @@ namespace TJAPlayer3
 		//-----------------
 		private CCounter ctAnimation;
 		private CTexture BackSurface;
-		//-----------------
-		#endregion
-	}
+        private CSkin.Cシステムサウンド voice終了画面;
+        //-----------------
+        #endregion
+    }
 }

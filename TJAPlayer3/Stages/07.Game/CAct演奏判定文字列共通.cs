@@ -39,13 +39,13 @@ namespace TJAPlayer3
 		{
 			this.st判定文字列 = new ST判定文字列[ 7 ];
 			Rectangle[] r = new Rectangle[] {
-				new Rectangle( 0, 0,    90, 60 ),		// Perfect
-				new Rectangle( 0, 0,    90, 60 ),		// Great
-				new Rectangle( 0, 60,   90, 60 ),		// Good
-				new Rectangle( 0, 120,   90, 60 ),		// Poor
-				new Rectangle( 0, 120,   90, 60 ),		// Miss
-				new Rectangle( 0, 180,   90, 60 ),		// Bad
-				new Rectangle( 0, 0,    90, 60 )		// Auto
+				new Rectangle( 0, 0,    105, 50 ),		// Perfect
+				new Rectangle( 0, 100,   105, 50 ),		// Great
+				new Rectangle( 0, 50,  105, 50 ),		// Good
+				new Rectangle( 0, 150,  105, 50 ),		// Poor
+				new Rectangle( 0, 200,  105, 50 ),		// Miss
+				new Rectangle( 0, 150,  105, 50 ),		// Bad
+				new Rectangle( 0, 0,    105, 50 )		// Auto
 			};
 			for ( int i = 0; i < 7; i++ )
 			{

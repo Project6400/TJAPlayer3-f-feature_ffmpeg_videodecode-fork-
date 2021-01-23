@@ -45,6 +45,11 @@ namespace TJAPlayer3
 		{
 			Trace.TraceInformation( "結果ステージを活性化します。" );
 			Trace.Indent();
+			var random = rng.Next(1, 99);
+			if (random <= 24) this.bgm結果画面 = new CSkin.Cシステムサウンド(@"Sounds\Result BGM.ogg", false, false, ESoundGroup.SongPlayback);
+			else if (random <= 50 && random >= 25) this.bgm結果画面 = new CSkin.Cシステムサウンド(@"Sounds\Result BGM_1.ogg", false, false, ESoundGroup.SongPlayback);
+			else if (random <= 75 && random >= 51) this.bgm結果画面 = new CSkin.Cシステムサウンド(@"Sounds\Result BGM_2.ogg", false, false, ESoundGroup.SongPlayback);
+			else if (random <= 99 && random >= 76) this.bgm結果画面 = new CSkin.Cシステムサウンド(@"Sounds\Result BGM_3.ogg", false, false, ESoundGroup.SongPlayback);
 			try
 			{
 				#region [ 初期化 ]
@@ -292,12 +297,6 @@ namespace TJAPlayer3
 					if( this.actFI.On進行描画() != 0 )
 					{
 						base.eフェーズID = CStage.Eフェーズ.共通_通常状態;
-						var random = rng.Next(1, 99);
-
-						if (random <= 24) this.bgm結果画面 = new CSkin.Cシステムサウンド(@"Sounds\Result BGM.ogg", false, false, ESoundGroup.SongPlayback);
-						else if (random <= 50 && random >= 25) this.bgm結果画面 = new CSkin.Cシステムサウンド(@"Sounds\Result BGM_1.ogg", false, false, ESoundGroup.SongPlayback);
-						else if (random <= 75 && random >= 51) this.bgm結果画面 = new CSkin.Cシステムサウンド(@"Sounds\Result BGM_2.ogg", false, false, ESoundGroup.SongPlayback);
-						//else if (random <= 99 && random >= 76) this.bgm結果画面 = new CSkin.Cシステムサウンド(@"Sounds\Result BGM_3.ogg", false, false, ESoundGroup.SongPlayback);
 						this.bgm結果画面.t再生する();
 						this.sound結果画面out = new CSkin.Cシステムサウンド(@"Sounds\Result out.ogg", false, false, ESoundGroup.SoundEffect);
 					}

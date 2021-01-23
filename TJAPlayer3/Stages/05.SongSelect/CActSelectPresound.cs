@@ -157,6 +157,7 @@ namespace TJAPlayer3
 					token.Token.ThrowIfCancellationRequested();
 					this.tサウンドの停止MT();
 
+
 					this.sound = tmps;
 					//------------
 
@@ -213,6 +214,7 @@ namespace TJAPlayer3
 		//Mr-Ojii 以下、TJAP2fPCより拝借＆TJAP3f用に改変
 		//-----------------
 
+		
 		public void tサウンドの停止MT()
 		{
 			if (this.sound != null)
@@ -226,7 +228,7 @@ namespace TJAPlayer3
 				this.sound = null;
 			}
 		}
-
+		
 		/// <summary>
 		/// マルチスレッドに対応したプレビューサウンドの作成処理
 		/// </summary>

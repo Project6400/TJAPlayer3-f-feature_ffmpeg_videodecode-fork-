@@ -167,7 +167,6 @@ namespace TJAPlayer3
 
 
 		// CActivity 実装
-
 		public override void On活性化()
 		{
 			this.sdDTXで指定されたフルコンボ音 = null;
@@ -197,7 +196,7 @@ namespace TJAPlayer3
 		}
 		public override void OnManagedリソースの解放()
 		{
-			if( !base.b活性化してない )
+			if (!base.b活性化してない)
 			{
 				Dan_Plate?.Dispose();
 				base.OnManagedリソースの解放();
@@ -350,11 +349,19 @@ namespace TJAPlayer3
 					TJAPlayer3.Tx.Gauge_Soul.t2D描画(TJAPlayer3.app.Device, 1174, y_Soul[i], new Rectangle(0, 0, 80, 80));
 				}
 				//演奏中のやつ使いまわせなかった。ファック。
-				this.tスコア文字表示(TJAPlayer3.Skin.nResultScoreX[i], TJAPlayer3.Skin.nResultScoreY[i], string.Format("{0,7:######0}", TJAPlayer3.stage結果.st演奏記録[i].nスコア));
+				this.tスコア文字表示(TJAPlayer3.Skin.nResultScoreX[i] + 50, TJAPlayer3.Skin.nResultScoreY[i], string.Format("{0,4:#####0}", TJAPlayer3.stage結果.st演奏記録[i].nPerfect数 * 2 + TJAPlayer3.stage結果.st演奏記録[i].nGreat数 + TJAPlayer3.stage結果.st演奏記録[i].nGood数));
+				TJAPlayer3.act文字コンソール.tPrint(TJAPlayer3.Skin.nResultScoreX[i] + 50, TJAPlayer3.Skin.nResultScoreY[i] + 50, C文字コンソール.Eフォント種別.白, string.Format("{0,7:######0}", TJAPlayer3.stage結果.st演奏記録[i].nスコア));
 				this.t小文字表示(TJAPlayer3.Skin.nResultGreatX[i], TJAPlayer3.Skin.nResultGreatY[i], string.Format("{0,4:###0}", TJAPlayer3.stage結果.st演奏記録[i].nPerfect数.ToString()));
-				this.t小文字表示(TJAPlayer3.Skin.nResultGoodX[i], TJAPlayer3.Skin.nResultGoodY[i], string.Format("{0,4:###0}", TJAPlayer3.stage結果.st演奏記録[i].nGreat数.ToString()));
-				this.t小文字表示(TJAPlayer3.Skin.nResultBadX[i], TJAPlayer3.Skin.nResultBadY[i], string.Format("{0,4:###0}", TJAPlayer3.stage結果.st演奏記録[i].nMiss数.ToString()));
-
+				this.t小文字表示(TJAPlayer3.Skin.nResultGoodX[i], TJAPlayer3.Skin.nResultGoodY[i], string.Format("{0,4:###0}", TJAPlayer3.stage結果.st演奏記録[i].nGreat数 + TJAPlayer3.stage結果.st演奏記録[i].nGood数));
+				if (TJAPlayer3.stage結果.st演奏記録[i].nGreat数 > 0 || TJAPlayer3.stage結果.st演奏記録[i].nGood数 > 0)
+				{
+					TJAPlayer3.act文字コンソール.tPrint(TJAPlayer3.Skin.nResultGoodX[i] + 110, TJAPlayer3.Skin.nResultGoodY[i] + 12, C文字コンソール.Eフォント種別.白, string.Format("{0:0}+{1:0}", TJAPlayer3.stage結果.st演奏記録[i].nGood数.ToString(), TJAPlayer3.stage結果.st演奏記録[i].nGreat数.ToString()));
+				}
+				this.t小文字表示(TJAPlayer3.Skin.nResultBadX[i], TJAPlayer3.Skin.nResultBadY[i], string.Format("{0,4:###0}", TJAPlayer3.stage結果.st演奏記録[i].nPoor数 + TJAPlayer3.stage結果.st演奏記録[i].nMiss数));
+				if (TJAPlayer3.stage結果.st演奏記録[i].nPoor数 > 0 || TJAPlayer3.stage結果.st演奏記録[i].nMiss数 > 0)
+                {
+					TJAPlayer3.act文字コンソール.tPrint(TJAPlayer3.Skin.nResultBadX[i] + 110, TJAPlayer3.Skin.nResultBadY[i] + 12, C文字コンソール.Eフォント種別.白, string.Format("{0:0}+{1:0}", TJAPlayer3.stage結果.st演奏記録[i].nPoor数.ToString(), TJAPlayer3.stage結果.st演奏記録[i].nMiss数.ToString()));
+                }
 				this.t小文字表示(TJAPlayer3.Skin.nResultComboX[i], TJAPlayer3.Skin.nResultComboY[i], string.Format("{0,4:###0}", TJAPlayer3.stage結果.st演奏記録[i].n最大コンボ数.ToString()));
 				this.t小文字表示(TJAPlayer3.Skin.nResultRollX[i], TJAPlayer3.Skin.nResultRollY[i], string.Format("{0,4:###0}", TJAPlayer3.stage結果.st演奏記録[i].n連打数.ToString()));
 

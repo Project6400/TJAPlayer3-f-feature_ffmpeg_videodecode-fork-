@@ -2798,7 +2798,7 @@ namespace TJAPlayer3
 		public int[] Game_Taiko_Combo_Text_X = new int[] { 268, 268 };
 		public int[] Game_Taiko_Combo_Text_Y = new int[] { 295, 472 };
 		public int[] Game_Taiko_Combo_Text_Size = new int[] { 100, 50 };
-		public bool Game_Taiko_Combo_Ex_IsJumping = true;
+		public bool Game_Taiko_Combo_Ex_IsJumping = false;
 		#endregion
 		#region Gauge
 		public int Game_Gauge_Rainbow_Ptn;

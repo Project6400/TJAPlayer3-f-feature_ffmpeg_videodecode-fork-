@@ -69,7 +69,6 @@ namespace TJAPlayer3
 
 		public void LoadTexture()
 		{
-			TitleTextureKey[] titleTextureKey = new TitleTextureKey[3];
 			#region 共通
 			Tile_Black = TJAPlayer3.ColorTexture(Brushes.Black);
 			Menu_Title = TxC(@"Menu_Title.png");
@@ -91,13 +90,6 @@ namespace TJAPlayer3
 			Title_Menu = TxC(TITLE + @"Menu.png");
 			Title_AcBar = TxC(TITLE + @"ActiveBar.png");
 			Title_InBar = TxC(TITLE + @"InactiveBar.png");
-			titleTextureKey[0] = this.ttk曲名テクスチャを生成する("演奏ゲーム", Color.White, Color.SaddleBrown);
-			titleTextureKey[1] = this.ttk曲名テクスチャを生成する("コンフィグ", Color.White, Color.SaddleBrown);
-			titleTextureKey[2] = this.ttk曲名テクスチャを生成する("やめる", Color.White, Color.SaddleBrown);
-			for (int i = 0; i < Title_Txt.Length; i++)
-			{
-				Title_Txt[i] = GenerateTitleTexture(titleTextureKey[i]);
-			}
 			#endregion
 
 			#region 2_コンフィグ画面
@@ -131,6 +123,7 @@ namespace TJAPlayer3
 			SongSelect_Cursor_Left = TxC(SONGSELECT + @"Cursor_Left.png");
 			SongSelect_Cursor_Right = TxC(SONGSELECT + @"Cursor_Right.png");
 			SongSelect_Bar_BackBox = TxC(SONGSELECT + @"Bar_BackBox.png");
+			SongSelect_PapaMama = TxC(SONGSELECT + @"PapaMama.png");
 
 			for (int i = 0; i < SongSelect_Lyric_Text.Length; i++)
 			{
@@ -144,7 +137,7 @@ namespace TJAPlayer3
 			{
 				SongSelect_Bar_Box_Genre[i] = TxC(SONGSELECT + @"Bar_Box_Genre_" + i.ToString() + ".png");
 			}
-			for (int i = 0; i <  SongSelect_Box_Center_Genre.Length; i++)
+			for (int i = 0; i < SongSelect_Box_Center_Genre.Length; i++)
 			{
 				SongSelect_Box_Center_Genre[i] = TxC(SONGSELECT + BOX_CENTER + @"Box_Center_Genre_" + i.ToString() + ".png");
 			}
@@ -154,7 +147,7 @@ namespace TJAPlayer3
 			}
 			for (int i = 0; i < SongSelect_Box_Center_Text_Genre.Length; i++)
 			{
-				SongSelect_Box_Center_Text_Genre[i] = TxC(SONGSELECT +BOX_CENTER+ @"Box_Center_Text_Genre_" + i.ToString() + ".png");
+				SongSelect_Box_Center_Text_Genre[i] = TxC(SONGSELECT + BOX_CENTER + @"Box_Center_Text_Genre_" + i.ToString() + ".png");
 			}
 			for (int i = 0; i < SongSelect_Bar_Center_Back_Genre.Length; i++)
 			{
@@ -186,6 +179,7 @@ namespace TJAPlayer3
 			Difficulty_Star = TxC(SONGSELECT + DIFFICULITY + @"Difficulty_Star.png");
 			Difficulty_Branch = TxC(SONGSELECT + DIFFICULITY + @"Difficulty_Branch.png");
 			Difficulty_Center_Bar = TxC(SONGSELECT + DIFFICULITY + @"Difficulty_Center_Bar.png");
+			Difficulty_PapaMama = TxC(SONGSELECT + DIFFICULITY + @"Difficulty_PapaMama.png");
 			Difficulty_Bar_Etc[0] = TxC(SONGSELECT + DIFFICULITY + @"Difficulty_Bar_Back.png");
 			Difficulty_Bar_Etc[1] = TxC(SONGSELECT + DIFFICULITY + @"Difficulty_Bar_Option.png");
 			Difficulty_Bar_Etc[2] = TxC(SONGSELECT + DIFFICULITY + @"Difficulty_Bar_Sound.png");
@@ -201,7 +195,7 @@ namespace TJAPlayer3
 			}
 			for (int i = 0; i < Difficulty_Anc.Length; i++)
 			{
-				Difficulty_Anc[i] = TxC(SONGSELECT + DIFFICULITY + @"Difficulty_Anc_" + (i+1).ToString() + "P.png");
+				Difficulty_Anc[i] = TxC(SONGSELECT + DIFFICULITY + @"Difficulty_Anc_" + (i + 1).ToString() + "P.png");
 			}
 			for (int i = 0; i < Difficulty_Anc_Same.Length; i++)
 			{
@@ -487,16 +481,10 @@ namespace TJAPlayer3
 			Gauge_Soul_Explosion[0] = TxC(GAME + GAUGE + @"1P_Explosion.png");
 			Gauge_Soul_Explosion[1] = TxC(GAME + GAUGE + @"2P_Explosion.png");
 
-            #region[Gauge_DanC]
-            Gauge_Danc = new CTexture[2];
-			Gauge_Danc[0] = TxC(GAME + GAUGE + @"DanC\" + @"1P.png");
-			Gauge_Danc[1] = TxC(GAME + GAUGE + @"DanC\" + @"2P.png");
-			Gauge_Base_Danc = new CTexture[2];
-			Gauge_Base_Danc[0] = TxC(GAME + GAUGE + @"DanC\" + @"1P_Base.png");
-			Gauge_Base_Danc[1] = TxC(GAME + GAUGE + @"DanC\" + @"2P_Base.png");
-			Gauge_Line_Danc = new CTexture[2];
-			Gauge_Line_Danc[0] = TxC(GAME + GAUGE + @"DanC\" + @"1P_Line.png");
-			Gauge_Line_Danc[1] = TxC(GAME + GAUGE + @"DanC\" + @"2P_Line.png");
+			#region[Gauge_DanC]
+			Gauge_Danc = TxC(GAME + GAUGE + @"DanC\" + @"1P.png");
+			Gauge_Base_Danc = TxC(GAME + GAUGE + @"DanC\" + @"1P_Base.png");
+			Gauge_Line_Danc = TxC(GAME + GAUGE + @"DanC\" + @"1P_Line.png");
 			TJAPlayer3.Skin.Game_Gauge_Rainbow_Danc_Ptn = TJAPlayer3.t連番画像の枚数を数える(CSkin.Path(BASE + GAME + GAUGE + @"DanC\" + @"Rainbow\"));
 			if (TJAPlayer3.Skin.Game_Gauge_Rainbow_Danc_Ptn != 0)
 			{
@@ -506,11 +494,11 @@ namespace TJAPlayer3
 					Gauge_Rainbow_Danc[i] = TxC(GAME + GAUGE + @"DanC\" + @"Rainbow\" + i.ToString() + ".png");
 				}
 			}
-            #endregion
+			#endregion
 
-            #endregion
-            #region 吹き出し
-            Balloon_Combo = new CTexture[2];
+			#endregion
+			#region 吹き出し
+			Balloon_Combo = new CTexture[2];
 			Balloon_Combo[0] = TxC(GAME + BALLOON + @"Combo_1P.png");
 			Balloon_Combo[1] = TxC(GAME + BALLOON + @"Combo_2P.png");
 			Balloon_Roll = TxC(GAME + BALLOON + @"Roll.png");
@@ -576,6 +564,13 @@ namespace TJAPlayer3
 
 			#endregion
 			#region 終了演出
+			End_Failed_L = new CTexture[4];
+			End_Failed_R = new CTexture[4];
+			for (int i = 0; i < 4; i++)
+			{
+				End_Failed_L[i] = TxC(GAME + END + @"Failed_L_" + i.ToString() + ".png");
+				End_Failed_R[i] = TxC(GAME + END + @"Failed_R_" + i.ToString() + ".png");
+			}
 			End_Clear_L = new CTexture[5];
 			End_Clear_R = new CTexture[5];
 			for (int i = 0; i < 5; i++)
@@ -583,9 +578,25 @@ namespace TJAPlayer3
 				End_Clear_L[i] = TxC(GAME + END + @"Clear_L_" + i.ToString() + ".png");
 				End_Clear_R[i] = TxC(GAME + END + @"Clear_R_" + i.ToString() + ".png");
 			}
+			End_Fan = new CTexture[4];
+			for (int i = 0; i < 4; i++)
+			{
+				End_Fan[i] = TxC(GAME + END + @"Fan_" + i.ToString() + ".png");
+			}
+			End_Failed_Impact = TxC(GAME + END + @"Failed_Impact.png");
+			End_Failed_Text = TxC(GAME + END + @"Failed_Text.png");
 			End_Clear_Text = TxC(GAME + END + @"Clear_Text.png");
 			End_Clear_Text_Effect = TxC(GAME + END + @"Clear_Text_Effect.png");
+			End_FullCombo_Text = TxC(GAME + END + @"FullCombo_Text.png");
+			End_FullCombo_Text_Effect = TxC(GAME + END + @"FullCombo_Text_Effect.png");
+			End_DonderFullCombo_Lane = TxC(GAME + END + @"DonderFullCombo_Lane.png");
+			End_DonderFullCombo_L = TxC(GAME + END + @"DonderFullCombo_L.png");
+			End_DonderFullCombo_R = TxC(GAME + END + @"DonderFullCombo_R.png");
+			End_DonderFullCombo_Text = TxC(GAME + END + @"DonderFullCombo_Text.png");
+			End_DonderFullCombo_Text_Effect = TxC(GAME + END + @"DonderFullCombo_Text_Effect.png");
 			if (End_Clear_Text_Effect != null) End_Clear_Text_Effect.b加算合成 = true;
+			if (End_FullCombo_Text_Effect != null) End_FullCombo_Text_Effect.b加算合成 = true;
+			if (End_DonderFullCombo_Text_Effect != null) End_DonderFullCombo_Text_Effect.b加算合成 = true;
 			#endregion
 			#region ゲームモード
 			GameMode_Timer_Tick = TxC(GAME + GAMEMODE + @"Timer_Tick.png");
@@ -627,6 +638,7 @@ namespace TJAPlayer3
 			Tokkun_ProgressBar = TxC(GAME + TRAINING + @"ProgressBar_Red.png");
 			Tokkun_ProgressBarWhite = TxC(GAME + TRAINING + @"ProgressBar_White.png");
 			Tokkun_GoGoPoint = TxC(GAME + TRAINING + @"GoGoPoint.png");
+			Tokkun_JumpPoint = TxC(GAME + TRAINING + @"JumpPoint.png");
 			Tokkun_Background_Up = TxC(GAME + TRAINING + @"Background_Up.png");
 			Tokkun_BigNumber = TxC(GAME + TRAINING + @"BigNumber.png");
 			Tokkun_SmallNumber = TxC(GAME + TRAINING + @"SmallNumber.png");
@@ -679,7 +691,6 @@ namespace TJAPlayer3
 			TJAPlayer3.t安全にDisposeする(ref Title_Menu);
 			TJAPlayer3.t安全にDisposeする(ref Title_AcBar);
 			TJAPlayer3.t安全にDisposeする(ref Title_InBar);
-			TJAPlayer3.t安全にDisposeする(ref Title_Txt);
 			#endregion
 
 			#region 2_コンフィグ画面
@@ -724,6 +735,7 @@ namespace TJAPlayer3
 			TJAPlayer3.t安全にDisposeする(ref SongSelect_Counter_Back);
 			TJAPlayer3.t安全にDisposeする(ref SongSelect_Counter_Num);
 			TJAPlayer3.t安全にDisposeする(ref SongSelect_ScoreWindow_Text);
+			TJAPlayer3.t安全にDisposeする(ref SongSelect_PapaMama);
 
 			#region[3.5難易度選択]
 			TJAPlayer3.t安全にDisposeする(ref Difficulty_Dan_Box);
@@ -731,6 +743,7 @@ namespace TJAPlayer3
 			TJAPlayer3.t安全にDisposeする(ref Difficulty_Star);
 			TJAPlayer3.t安全にDisposeする(ref Difficulty_Branch);
 			TJAPlayer3.t安全にDisposeする(ref Difficulty_Center_Bar);
+			TJAPlayer3.t安全にDisposeする(ref Difficulty_PapaMama);
 			TJAPlayer3.t安全にDisposeする(ref ChangeSE_Box);
 			TJAPlayer3.t安全にDisposeする(ref ChangeSE_Note);
 			TJAPlayer3.t安全にDisposeする(ref ChangeSE_Num);
@@ -743,7 +756,7 @@ namespace TJAPlayer3
 			TJAPlayer3.t安全にDisposeする(ref Difficulty_Bar);
 			TJAPlayer3.t安全にDisposeする(ref Difficulty_Bar_Etc);
 			TJAPlayer3.t安全にDisposeする(ref Difficulty_Mark);
-			
+
 			#endregion
 
 			#endregion
@@ -786,7 +799,7 @@ namespace TJAPlayer3
 				TJAPlayer3.t安全にDisposeする(ref Chara_Balloon_Broke[nPlayer]);
 				TJAPlayer3.t安全にDisposeする(ref Chara_Balloon_Miss[nPlayer]);
 			}
-			
+
 			#endregion
 			#region 踊り子
 			for (int i = 0; i < Dancer.Length; i++)
@@ -825,7 +838,7 @@ namespace TJAPlayer3
 			TJAPlayer3.t安全にDisposeする(ref Taiko_Ka_Right);
 			TJAPlayer3.t安全にDisposeする(ref Taiko_LevelUp);
 			TJAPlayer3.t安全にDisposeする(ref Taiko_LevelDown);
-			TJAPlayer3.t安全にDisposeする(ref Couse_Symbol);			
+			TJAPlayer3.t安全にDisposeする(ref Couse_Symbol);
 			TJAPlayer3.t安全にDisposeする(ref Taiko_Score);
 			TJAPlayer3.t安全にDisposeする(ref Taiko_Combo);
 			TJAPlayer3.t安全にDisposeする(ref Taiko_Combo_Effect);
@@ -841,17 +854,17 @@ namespace TJAPlayer3
 			TJAPlayer3.t安全にDisposeする(ref Gauge_Soul_Fire);
 			TJAPlayer3.t安全にDisposeする(ref Gauge_Soul_Explosion);
 
-            #region[Gauge_DanC]
-            TJAPlayer3.t安全にDisposeする(ref Gauge_Danc);
+			#region[Gauge_DanC]
+			TJAPlayer3.t安全にDisposeする(ref Gauge_Danc);
 			TJAPlayer3.t安全にDisposeする(ref Gauge_Base_Danc);
 			TJAPlayer3.t安全にDisposeする(ref Gauge_Line_Danc);
 			TJAPlayer3.t安全にDisposeする(ref Gauge_Rainbow_Danc);
-			
-            #endregion
 
-            #endregion
-            #region 吹き出し
-            TJAPlayer3.t安全にDisposeする(ref Balloon_Combo);
+			#endregion
+
+			#endregion
+			#region 吹き出し
+			TJAPlayer3.t安全にDisposeする(ref Balloon_Combo);
 			TJAPlayer3.t安全にDisposeする(ref Balloon_Roll);
 			TJAPlayer3.t安全にDisposeする(ref Balloon_Balloon);
 			TJAPlayer3.t安全にDisposeする(ref Balloon_Number_Roll);
@@ -860,7 +873,7 @@ namespace TJAPlayer3
 			#endregion
 			#region エフェクト
 			TJAPlayer3.t安全にDisposeする(ref Effects_Hit_Explosion);
-			TJAPlayer3.t安全にDisposeする(ref  Effects_Hit_Explosion_Big);
+			TJAPlayer3.t安全にDisposeする(ref Effects_Hit_Explosion_Big);
 			TJAPlayer3.t安全にDisposeする(ref Effects_Hit_FireWorks);
 			TJAPlayer3.t安全にDisposeする(ref Effects_Fire);
 			TJAPlayer3.t安全にDisposeする(ref Effects_Rainbow);
@@ -870,7 +883,7 @@ namespace TJAPlayer3
 			TJAPlayer3.t安全にDisposeする(ref Effects_Hit_Good);
 			TJAPlayer3.t安全にDisposeする(ref Effects_Hit_Good_Big);
 			TJAPlayer3.t安全にDisposeする(ref Effects_Roll);
-			
+
 			#endregion
 			#region レーン
 			TJAPlayer3.t安全にDisposeする(ref Lane_Base);
@@ -886,8 +899,20 @@ namespace TJAPlayer3
 			#region 終了演出
 			TJAPlayer3.t安全にDisposeする(ref End_Clear_L);
 			TJAPlayer3.t安全にDisposeする(ref End_Clear_R);
+			TJAPlayer3.t安全にDisposeする(ref End_Failed_L);
+			TJAPlayer3.t安全にDisposeする(ref End_Failed_R);
+			TJAPlayer3.t安全にDisposeする(ref End_Fan);
+			TJAPlayer3.t安全にDisposeする(ref End_Failed_Text);
+			TJAPlayer3.t安全にDisposeする(ref End_Failed_Impact);
 			TJAPlayer3.t安全にDisposeする(ref End_Clear_Text);
 			TJAPlayer3.t安全にDisposeする(ref End_Clear_Text_Effect);
+			TJAPlayer3.t安全にDisposeする(ref End_FullCombo_Text);
+			TJAPlayer3.t安全にDisposeする(ref End_FullCombo_Text_Effect);
+			TJAPlayer3.t安全にDisposeする(ref End_DonderFullCombo_Lane);
+			TJAPlayer3.t安全にDisposeする(ref End_DonderFullCombo_L);
+			TJAPlayer3.t安全にDisposeする(ref End_DonderFullCombo_R);
+			TJAPlayer3.t安全にDisposeする(ref End_DonderFullCombo_Text);
+			TJAPlayer3.t安全にDisposeする(ref End_DonderFullCombo_Text_Effect);
 			#endregion
 			#region ゲームモード
 			TJAPlayer3.t安全にDisposeする(ref GameMode_Timer_Tick);
@@ -920,6 +945,7 @@ namespace TJAPlayer3
 			TJAPlayer3.t安全にDisposeする(ref Tokkun_ProgressBar);
 			TJAPlayer3.t安全にDisposeする(ref Tokkun_ProgressBarWhite);
 			TJAPlayer3.t安全にDisposeする(ref Tokkun_GoGoPoint);
+			TJAPlayer3.t安全にDisposeする(ref Tokkun_JumpPoint);
 			TJAPlayer3.t安全にDisposeする(ref Tokkun_Background_Up);
 			TJAPlayer3.t安全にDisposeする(ref Tokkun_BigNumber);
 			TJAPlayer3.t安全にDisposeする(ref Tokkun_SmallNumber);
@@ -949,71 +975,6 @@ namespace TJAPlayer3
 
 		}
 
-		private static CTexture GenerateTitleTexture(TitleTextureKey titleTextureKey)
-		{
-			using (var bmp = new Bitmap(titleTextureKey.cPrivateFastFont.DrawPrivateFont(
-				titleTextureKey.str文字, titleTextureKey.forecolor, titleTextureKey.backcolor, true)))
-			{
-				CTexture tx文字テクスチャ = TJAPlayer3.tテクスチャの生成(bmp, false);
-				if (tx文字テクスチャ.szテクスチャサイズ.Height > titleTextureKey.maxHeight)
-				{
-					tx文字テクスチャ.vc拡大縮小倍率.Y = (float)(((double)titleTextureKey.maxHeight) / tx文字テクスチャ.szテクスチャサイズ.Height);
-				}
-
-				return tx文字テクスチャ;
-			}
-		}
-		private sealed class TitleTextureKey
-		{
-			public readonly string str文字;
-			public readonly CPrivateFastFont cPrivateFastFont;
-			public readonly Color forecolor;
-			public readonly Color backcolor;
-			public readonly int maxHeight;
-
-			public TitleTextureKey(string str文字, CPrivateFastFont cPrivateFastFont, Color forecolor, Color backcolor, int maxHeight)
-			{
-				this.str文字 = str文字;
-				this.cPrivateFastFont = cPrivateFastFont;
-				this.forecolor = forecolor;
-				this.backcolor = backcolor;
-				this.maxHeight = maxHeight;
-			}
-
-			private bool Equals(TitleTextureKey other)
-			{
-				return string.Equals(str文字, other.str文字) &&
-					   cPrivateFastFont.Equals(other.cPrivateFastFont) &&
-					   forecolor.Equals(other.forecolor) &&
-					   backcolor.Equals(other.backcolor) &&
-					   maxHeight == other.maxHeight;
-			}
-
-			public override bool Equals(object obj)
-			{
-				if (ReferenceEquals(null, obj)) return false;
-				if (ReferenceEquals(this, obj)) return true;
-				return obj is TitleTextureKey other && Equals(other);
-			}
-
-			public override int GetHashCode()
-			{
-				unchecked
-				{
-					var hashCode = str文字.GetHashCode();
-					hashCode = (hashCode * 397) ^ cPrivateFastFont.GetHashCode();
-					hashCode = (hashCode * 397) ^ forecolor.GetHashCode();
-					hashCode = (hashCode * 397) ^ backcolor.GetHashCode();
-					hashCode = (hashCode * 397) ^ maxHeight;
-					return hashCode;
-				}
-			}
-		}
-		private TitleTextureKey ttk曲名テクスチャを生成する(string str文字, Color forecolor, Color backcolor)
-		{
-			return new TitleTextureKey(str文字, new CPrivateFastFont(new FontFamily(TJAPlayer3.ConfigIni.FontName), 28), forecolor, backcolor, 410);
-		}
-
 		#region 共通
 		public CTexture Tile_Black,
 			Menu_Title,
@@ -1028,12 +989,12 @@ namespace TJAPlayer3
 			Difficulty_Icons;
 		public CTexture[] NamePlate;
 		#endregion
+
 		#region 1_タイトル画面
 		public CTexture Title_Background,
 			Title_Menu,
 			Title_AcBar,
 			Title_InBar;
-		public CTexture[] Title_Txt = new CTexture[3];
 		#endregion
 
 		#region 2_コンフィグ画面
@@ -1065,7 +1026,8 @@ namespace TJAPlayer3
 			SongSelect_Cursor_Left,
 			SongSelect_Cursor_Right,
 			SongSelect_ScoreWindow_Text,
-			SongSelect_Bar_BackBox;
+			SongSelect_Bar_BackBox,
+			SongSelect_PapaMama;
 		public CTexture[] SongSelect_GenreBack = new CTexture[9],
 			SongSelect_ScoreWindow = new CTexture[(int)Difficulty.Total],
 			SongSelect_Lyric_Text = new CTexture[9],
@@ -1084,6 +1046,7 @@ namespace TJAPlayer3
 			Difficulty_Star,
 			Difficulty_Branch,
 			Difficulty_Center_Bar,
+			Difficulty_PapaMama,
 			ChangeSE_Box,
 			ChangeSE_Note,
 			ChangeSE_Num,
@@ -1177,11 +1140,11 @@ namespace TJAPlayer3
 			Gauge_Line,
 			Gauge_Rainbow,
 			Gauge_Soul_Explosion,
+			Gauge_Rainbow_Danc;
+		public CTexture Gauge_Soul,
 			Gauge_Danc,
 			Gauge_Base_Danc,
 			Gauge_Line_Danc,
-			Gauge_Rainbow_Danc;
-		public CTexture Gauge_Soul,
 			Gauge_Soul_Fire;
 		#endregion
 		#region 吹き出し
@@ -1217,10 +1180,22 @@ namespace TJAPlayer3
 			Lane_Background_GoGo;
 		#endregion
 		#region 終了演出
-		public CTexture[] End_Clear_L,
-			End_Clear_R;
-		public CTexture End_Clear_Text,
-			End_Clear_Text_Effect;
+		public CTexture[] End_Failed_L,
+			End_Failed_R,
+			End_Clear_L,
+			End_Clear_R,
+			End_Fan;
+		public CTexture End_Failed_Text,
+			End_Failed_Impact,
+			End_Clear_Text,
+			End_Clear_Text_Effect,
+			End_FullCombo_Text,
+			End_FullCombo_Text_Effect,
+			End_DonderFullCombo_Lane,
+			End_DonderFullCombo_L,
+			End_DonderFullCombo_R,
+			End_DonderFullCombo_Text,
+			End_DonderFullCombo_Text_Effect;
 		#endregion
 		#region ゲームモード
 		public CTexture GameMode_Timer_Frame,
@@ -1253,6 +1228,7 @@ namespace TJAPlayer3
 			Tokkun_ProgressBar,
 			Tokkun_ProgressBarWhite,
 			Tokkun_GoGoPoint,
+			Tokkun_JumpPoint,
 			Tokkun_Background_Up,
 			Tokkun_BigNumber,
 			Tokkun_SmallNumber,

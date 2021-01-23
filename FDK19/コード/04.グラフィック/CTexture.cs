@@ -394,7 +394,7 @@ namespace FDK
 		/// <param name="device">Direct3D9 デバイス。</param>
 		/// <param name="x">描画位置（テクスチャの左上位置の X 座標[dot]）。</param>
 		/// <param name="y">描画位置（テクスチャの左上位置の Y 座標[dot]）。</param>
-		public void t2D描画(Device device, int x, int y)
+		public void t2D描画(Device device, int x, int y, Rectangle[] rectangle)
 		{
 			this.t2D描画(device, x, y, 1f, this.rc全画像);
 		}

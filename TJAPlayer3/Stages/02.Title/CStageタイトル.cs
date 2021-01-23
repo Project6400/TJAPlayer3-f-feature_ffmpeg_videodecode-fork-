@@ -69,7 +69,8 @@ namespace TJAPlayer3
 		}
 		public override void OnManagedリソースの作成()
 		{
-			if( !base.b活性化してない) { 
+			if (!base.b活性化してない)
+			{
 				texttexture[0] = this.文字テクスチャを生成する("演奏ゲーム", Color.White, Color.SaddleBrown);
 				texttexture[1] = this.文字テクスチャを生成する("コンフィグ", Color.White, Color.SaddleBrown);
 				texttexture[2] = this.文字テクスチャを生成する("やめる", Color.White, Color.SaddleBrown);
@@ -81,7 +82,7 @@ namespace TJAPlayer3
 		}
 		public override void OnManagedリソースの解放()
 		{
-			if( !base.b活性化してない )
+			if (!base.b活性化してない)
 			{
 				TJAPlayer3.t安全にDisposeする(ref texttexture);
 				base.OnManagedリソースの解放();
@@ -214,25 +215,12 @@ namespace TJAPlayer3
 						TJAPlayer3.Tx.Title_AcBar.t2D描画(TJAPlayer3.app.Device, MENU_XT[this.n現在のカーソル行] - TJAPlayer3.Tx.Title_AcBar.sz画像サイズ.Width / 2, MENU_YT);
 					}
 
-					TJAPlayer3.Tx.Title_Txt[this.n現在のカーソル行] = texttexture[this.n現在のカーソル行 + 3];
-					
-					if (this.n現在のカーソル行 != (int)E戻り値.GAMESTART - 1)
-					{
-						TJAPlayer3.Tx.Title_Txt[0] = texttexture[0];
-					}
-					if (this.n現在のカーソル行 != (int)E戻り値.CONFIG - 1)
-					{
-						TJAPlayer3.Tx.Title_Txt[1] = texttexture[1];
-					}
-					if (this.n現在のカーソル行 != (int)E戻り値.EXIT - 1)
-					{
-						TJAPlayer3.Tx.Title_Txt[2] = texttexture[2];
-					}
-
 					for (int i = 0; i < 3; i++)
 					{
-						TJAPlayer3.Tx.Title_Txt[i].t2D描画(TJAPlayer3.app.Device, MENU_XT[i] - TJAPlayer3.Tx.Title_Txt[i].szテクスチャサイズ.Width / 2, MENU_YT + 30);
-
+						if (i != this.n現在のカーソル行)
+							texttexture[i].t2D描画(TJAPlayer3.app.Device, MENU_XT[i] - texttexture[i].szテクスチャサイズ.Width / 2, MENU_YT + 30);
+						else
+							texttexture[i + 3].t2D描画(TJAPlayer3.app.Device, MENU_XT[i] - texttexture[i + 3].szテクスチャサイズ.Width / 2, MENU_YT + 30);
 					}
 				}
 				else
@@ -266,14 +254,14 @@ namespace TJAPlayer3
 				// URLの座標が押されたらブラウザで開いてやる 兼 マウスクリックのテスト
 				// クライアント領域内のカーソル座標を取得する。
 				// point.X、point.Yは負の値になることもある。
-				var point = TJAPlayer3.app.Window.PointToClient(System.Windows.Forms.Cursor.Position);
+			//	var point = TJAPlayer3.app.Window.PointToClient(System.Windows.Forms.Cursor.Position);
 				// クライアント領域の横幅を取得して、1280で割る。もちろんdouble型。
-				var scaling = 1.000 * TJAPlayer3.app.Window.ClientSize.Width / 1280;
-				if (TJAPlayer3.Input管理.Mouse.bキーが押された((int)SlimDXKeys.MouseObject.Button1))
-				{
-					if (point.X >= 180 * scaling && point.X <= 490 * scaling && point.Y >= 0 && point.Y <= 20 * scaling)
-						System.Diagnostics.Process.Start(strCreator);
-				}
+			//	var scaling = 1.000 * TJAPlayer3.app.Window.ClientSize.Width / 1280;
+			//	if (TJAPlayer3.Input管理.Mouse.bキーが押された((int)OpenTK.Input.MouseButton.Left))
+			//	{
+			//		if (point.X >= 180 * scaling && point.X <= 490 * scaling && point.Y >= 0 && point.Y <= 20 * scaling)
+			//			System.Diagnostics.Process.Start(strCreator);
+			//	}
 
 				//CDTXMania.act文字コンソール.tPrint(0, 80, C文字コンソール.Eフォント種別.白, point.X.ToString());
 				//CDTXMania.act文字コンソール.tPrint(0, 100, C文字コンソール.Eフォント種別.白, point.Y.ToString());
@@ -392,9 +380,11 @@ namespace TJAPlayer3
 			}
 		}
 
-		private CTexture 文字テクスチャを生成する(string str文字, Color forecolor, Color backcolor) {
-			using (var bmp = new CPrivateFastFont(new FontFamily(TJAPlayer3.ConfigIni.FontName), 28).DrawPrivateFont(str文字, forecolor, backcolor, true)) {
-				return TJAPlayer3.tテクスチャの生成(bmp, false);
+		private CTexture 文字テクスチャを生成する(string str文字, Color forecolor, Color backcolor)
+		{
+			using (var bmp = new CPrivateFastFont(new FontFamily(TJAPlayer3.ConfigIni.FontName), 28).DrawPrivateFont(str文字, forecolor, backcolor, true))
+			{
+				return TJAPlayer3.tテクスチャの生成(bmp);
 			}
 		}
 
@@ -410,19 +400,19 @@ namespace TJAPlayer3
 		private const int MENU_X = 506;
 		private const int MENU_Y = 513;
 		//縦スタイル用
-		private readonly int[] MENU_XT = {300,640,980 };
+		private readonly int[] MENU_XT = { 300, 640, 980 };
 		private const int MENU_YT = 100;
 		//------------------------------------
 		private int n現在のカーソル行;
-	
+
 		private void tカーソルを下へ移動する()
 		{
-			if ( this.n現在のカーソル行 != (int) E戻り値.EXIT - 1 )
+			if (this.n現在のカーソル行 != (int)E戻り値.EXIT - 1)
 			{
 				TJAPlayer3.Skin.soundカーソル移動音.t再生する();
 				this.n現在のカーソル行++;
-				this.ct下移動用.t開始( 0, 100, 1, TJAPlayer3.Timer );
-				if( this.ct上移動用.b進行中 )
+				this.ct下移動用.t開始(0, 100, 1, TJAPlayer3.Timer);
+				if (this.ct上移動用.b進行中)
 				{
 					this.ct下移動用.n現在の値 = 100 - this.ct上移動用.n現在の値;
 					this.ct上移動用.t停止();
@@ -431,12 +421,12 @@ namespace TJAPlayer3
 		}
 		private void tカーソルを上へ移動する()
 		{
-			if ( this.n現在のカーソル行 != (int) E戻り値.GAMESTART - 1 )
+			if (this.n現在のカーソル行 != (int)E戻り値.GAMESTART - 1)
 			{
 				TJAPlayer3.Skin.soundカーソル移動音.t再生する();
 				this.n現在のカーソル行--;
-				this.ct上移動用.t開始( 0, 100, 1, TJAPlayer3.Timer );
-				if( this.ct下移動用.b進行中 )
+				this.ct上移動用.t開始(0, 100, 1, TJAPlayer3.Timer);
+				if (this.ct下移動用.b進行中)
 				{
 					this.ct上移動用.n現在の値 = 100 - this.ct下移動用.n現在の値;
 					this.ct下移動用.t停止();

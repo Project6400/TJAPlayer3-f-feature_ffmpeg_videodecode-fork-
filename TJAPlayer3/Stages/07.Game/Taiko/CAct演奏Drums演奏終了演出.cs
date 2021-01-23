@@ -61,7 +61,8 @@ namespace TJAPlayer3
 			}
 		}
 
-		public void Stop() {
+		public void Stop()
+		{
 			this.ct進行メイン = null;//nullにすれば、必然的に止まる。
 		}
 
@@ -82,6 +83,7 @@ namespace TJAPlayer3
 		{
 			this.b再生済み = false;
 			this.soundClear = TJAPlayer3.Sound管理.tサウンドを生成する(CSkin.Path(@"Sounds\Clear.ogg"), ESoundGroup.SoundEffect);
+			this.soundFailed = TJAPlayer3.Sound管理.tサウンドを生成する(CSkin.Path(@"Sounds\Failed.ogg"), ESoundGroup.SoundEffect);
 			base.OnManagedリソースの作成();
 		}
 
@@ -89,6 +91,8 @@ namespace TJAPlayer3
 		{
 			if (this.soundClear != null)
 				this.soundClear.t解放する();
+			if (this.soundFailed != null)
+				this.soundFailed.t解放する();
 			base.OnManagedリソースの解放();
 		}
 
@@ -109,6 +113,107 @@ namespace TJAPlayer3
 					switch (this.Mode[i])
 					{
 						case EndMode.StageFailed:
+							int[] x = new int[] { 210, 386 };
+							for (int j = 0; j < TJAPlayer3.ConfigIni.nPlayerCount; j++)
+							{
+								if (this.soundFailed != null && !this.b再生済み)
+								{
+									this.soundFailed.t再生を開始する();
+									this.b再生済み = true;
+								}
+							}
+							if (TJAPlayer3.Tx.End_Failed_Text != null)
+							{
+								#region[ 文字 ]
+								//登場アニメは20フレーム。うち最初の5フレームは半透過状態。
+								float[] f文字拡大率 = new float[] { 1.04f, 1.11f, 1.15f, 1.19f, 1.23f, 1.26f, 1.30f, 1.31f, 1.32f, 1.32f, 1.32f, 1.30f, 1.30f, 1.26f, 1.25f, 1.19f, 1.15f, 1.11f, 1.05f, 1.0f };
+								int[] n透明度 = new int[] { 43, 85, 128, 170, 213, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255 };
+								if (this.ct進行メイン.n現在の値 >= 17)
+								{
+									if (this.ct進行メイン.n現在の値 <= 36)
+									{
+										TJAPlayer3.Tx.End_Failed_Text.vc拡大縮小倍率.Y = f文字拡大率[this.ct進行メイン.n現在の値 - 17];
+										TJAPlayer3.Tx.End_Failed_Text.Opacity = n透明度[this.ct進行メイン.n現在の値 - 17];
+										TJAPlayer3.Tx.End_Failed_Text.t2D描画(TJAPlayer3.app.Device, 634, (int)(x[i] - ((90 * f文字拡大率[this.ct進行メイン.n現在の値 - 17]) - 90)), new Rectangle(0, 0, 450, 90));
+									}
+									else
+									{
+										TJAPlayer3.Tx.End_Failed_Text.vc拡大縮小倍率.Y = 1.0f;
+										TJAPlayer3.Tx.End_Failed_Text.t2D描画(TJAPlayer3.app.Device, 634, x[i], new Rectangle(0, 0, 450, 90));
+									}
+								}
+								/*	if (this.ct進行メイン.n現在の値 >= 19)
+									{
+										if (this.ct進行メイン.n現在の値 <= 38)
+										{
+											TJAPlayer3.Tx.End_Failed_Text.vc拡大縮小倍率.Y = f文字拡大率[this.ct進行メイン.n現在の値 - 19];
+											TJAPlayer3.Tx.End_Failed_Text.Opacity = n透明度[this.ct進行メイン.n現在の値 - 19];
+											TJAPlayer3.Tx.End_Failed_Text.t2D描画(TJAPlayer3.app.Device, 692, (int)(x[i] - ((90 * f文字拡大率[this.ct進行メイン.n現在の値 - 19]) - 90)), new Rectangle(90, 0, 90, 90));
+										}
+										else
+										{
+											TJAPlayer3.Tx.End_Failed_Text.vc拡大縮小倍率.Y = 1.0f;
+											TJAPlayer3.Tx.End_Failed_Text.t2D描画(TJAPlayer3.app.Device, 692, x[i], new Rectangle(90, 0, 90, 90));
+										}
+									}
+									TJAPlayer3.Tx.End_Failed_Text.vc拡大縮小倍率.Y = 1.0f;
+									if (this.ct進行メイン.n現在の値 >= 21)
+									{
+										if (this.ct進行メイン.n現在の値 <= 40)
+										{
+											TJAPlayer3.Tx.End_Failed_Text.vc拡大縮小倍率.Y = f文字拡大率[this.ct進行メイン.n現在の値 - 21];
+											TJAPlayer3.Tx.End_Failed_Text.Opacity = n透明度[this.ct進行メイン.n現在の値 - 21];
+											TJAPlayer3.Tx.End_Failed_Text.t2D描画(TJAPlayer3.app.Device, 750, x[i] - (int)((90 * f文字拡大率[this.ct進行メイン.n現在の値 - 21]) - 90), new Rectangle(180, 0, 90, 90));
+										}
+										else
+										{
+											TJAPlayer3.Tx.End_Failed_Text.vc拡大縮小倍率.Y = 1.0f;
+											TJAPlayer3.Tx.End_Failed_Text.t2D描画(TJAPlayer3.app.Device, 750, x[i], new Rectangle(180, 0, 90, 90));
+										}
+									}
+									if (this.ct進行メイン.n現在の値 >= 23)
+									{
+										if (this.ct進行メイン.n現在の値 <= 42)
+										{
+											TJAPlayer3.Tx.End_Failed_Text.vc拡大縮小倍率.Y = f文字拡大率[this.ct進行メイン.n現在の値 - 23];
+											TJAPlayer3.Tx.End_Failed_Text.Opacity = n透明度[this.ct進行メイン.n現在の値 - 23];
+											TJAPlayer3.Tx.End_Failed_Text.t2D描画(TJAPlayer3.app.Device, 819, x[i] - (int)((90 * f文字拡大率[this.ct進行メイン.n現在の値 - 23]) - 90), new Rectangle(270, 0, 90, 90));
+										}
+										else
+										{
+											TJAPlayer3.Tx.End_Failed_Text.vc拡大縮小倍率.Y = 1.0f;
+											TJAPlayer3.Tx.End_Failed_Text.t2D描画(TJAPlayer3.app.Device, 819, x[i], new Rectangle(270, 0, 90, 90));
+										}
+									}
+									if (this.ct進行メイン.n現在の値 >= 25)
+									{
+										if (this.ct進行メイン.n現在の値 <= 44)
+										{
+											TJAPlayer3.Tx.End_Failed_Text.vc拡大縮小倍率.Y = f文字拡大率[this.ct進行メイン.n現在の値 - 25];
+											TJAPlayer3.Tx.End_Failed_Text.Opacity = n透明度[this.ct進行メイン.n現在の値 - 25];
+											TJAPlayer3.Tx.End_Failed_Text.t2D描画(TJAPlayer3.app.Device, 890, (x[i] + 2) - (int)((90 * f文字拡大率[this.ct進行メイン.n現在の値 - 25]) - 90), new Rectangle(360, 0, 90, 90));
+										}
+										else
+										{
+											TJAPlayer3.Tx.End_Failed_Text.vc拡大縮小倍率.Y = 1.0f;
+											TJAPlayer3.Tx.End_Failed_Text.t2D描画(TJAPlayer3.app.Device, 890, x[i] + 2, new Rectangle(360, 0, 90, 90));
+										}
+									} */
+								if (this.ct進行メイン.n現在の値 >= 50 && this.ct進行メイン.n現在の値 < 90)
+								{
+									if (this.ct進行メイン.n現在の値 < 70)
+									{
+										TJAPlayer3.Tx.End_Failed_Impact.Opacity = (this.ct進行メイン.n現在の値 - 50) * (255 / 20);
+										TJAPlayer3.Tx.End_Failed_Impact.t2D描画(TJAPlayer3.app.Device, 634, x[i] - 2);
+									}
+									else
+									{
+										TJAPlayer3.Tx.End_Failed_Impact.Opacity = 255 - ((this.ct進行メイン.n現在の値 - 70) * (255 / 20));
+										TJAPlayer3.Tx.End_Failed_Impact.t2D描画(TJAPlayer3.app.Device, 634, x[i] - 2);
+									}
+								}
+								#endregion
+							}
 							break;
 						case EndMode.StageCleared:
 							int[] y = new int[] { 210, 386 };
@@ -141,71 +246,71 @@ namespace TJAPlayer3
 									{
 										TJAPlayer3.Tx.End_Clear_Text.vc拡大縮小倍率.Y = f文字拡大率[this.ct進行メイン.n現在の値 - 17];
 										TJAPlayer3.Tx.End_Clear_Text.Opacity = n透明度[this.ct進行メイン.n現在の値 - 17];
-										TJAPlayer3.Tx.End_Clear_Text.t2D描画(TJAPlayer3.app.Device, 634, (int)(y[i] - ((90 * f文字拡大率[this.ct進行メイン.n現在の値 - 17]) - 90)), new Rectangle(0, 0, 90, 90));
+										TJAPlayer3.Tx.End_Clear_Text.t2D描画(TJAPlayer3.app.Device, 634, (int)(y[i] - ((90 * f文字拡大率[this.ct進行メイン.n現在の値 - 17]) - 90)), new Rectangle(0, 0, 450, 101));
 									}
 									else
 									{
 										TJAPlayer3.Tx.End_Clear_Text.vc拡大縮小倍率.Y = 1.0f;
-										TJAPlayer3.Tx.End_Clear_Text.t2D描画(TJAPlayer3.app.Device, 634, y[i], new Rectangle(0, 0, 90, 90));
+										TJAPlayer3.Tx.End_Clear_Text.t2D描画(TJAPlayer3.app.Device, 634, y[i], new Rectangle(0, 0, 450, 101));
 									}
 								}
-								if (this.ct進行メイン.n現在の値 >= 19)
-								{
-									if (this.ct進行メイン.n現在の値 <= 38)
+								/*	if (this.ct進行メイン.n現在の値 >= 19)
 									{
-										TJAPlayer3.Tx.End_Clear_Text.vc拡大縮小倍率.Y = f文字拡大率[this.ct進行メイン.n現在の値 - 19];
-										TJAPlayer3.Tx.End_Clear_Text.Opacity = n透明度[this.ct進行メイン.n現在の値 - 19];
-										TJAPlayer3.Tx.End_Clear_Text.t2D描画(TJAPlayer3.app.Device, 692, (int)(y[i] - ((90 * f文字拡大率[this.ct進行メイン.n現在の値 - 19]) - 90)), new Rectangle(90, 0, 90, 90));
+										if (this.ct進行メイン.n現在の値 <= 38)
+										{
+											TJAPlayer3.Tx.End_Clear_Text.vc拡大縮小倍率.Y = f文字拡大率[this.ct進行メイン.n現在の値 - 19];
+											TJAPlayer3.Tx.End_Clear_Text.Opacity = n透明度[this.ct進行メイン.n現在の値 - 19];
+											TJAPlayer3.Tx.End_Clear_Text.t2D描画(TJAPlayer3.app.Device, 692, (int)(y[i] - ((90 * f文字拡大率[this.ct進行メイン.n現在の値 - 19]) - 90)), new Rectangle(90, 0, 90, 90));
+										}
+										else
+										{
+											TJAPlayer3.Tx.End_Clear_Text.vc拡大縮小倍率.Y = 1.0f;
+											TJAPlayer3.Tx.End_Clear_Text.t2D描画(TJAPlayer3.app.Device, 692, y[i], new Rectangle(90, 0, 90, 90));
+										}
 									}
-									else
+									TJAPlayer3.Tx.End_Clear_Text.vc拡大縮小倍率.Y = 1.0f;
+									if (this.ct進行メイン.n現在の値 >= 21)
 									{
-										TJAPlayer3.Tx.End_Clear_Text.vc拡大縮小倍率.Y = 1.0f;
-										TJAPlayer3.Tx.End_Clear_Text.t2D描画(TJAPlayer3.app.Device, 692, y[i], new Rectangle(90, 0, 90, 90));
+										if (this.ct進行メイン.n現在の値 <= 40)
+										{
+											TJAPlayer3.Tx.End_Clear_Text.vc拡大縮小倍率.Y = f文字拡大率[this.ct進行メイン.n現在の値 - 21];
+											TJAPlayer3.Tx.End_Clear_Text.Opacity = n透明度[this.ct進行メイン.n現在の値 - 21];
+											TJAPlayer3.Tx.End_Clear_Text.t2D描画(TJAPlayer3.app.Device, 750, y[i] - (int)((90 * f文字拡大率[this.ct進行メイン.n現在の値 - 21]) - 90), new Rectangle(180, 0, 90, 90));
+										}
+										else
+										{
+											TJAPlayer3.Tx.End_Clear_Text.vc拡大縮小倍率.Y = 1.0f;
+											TJAPlayer3.Tx.End_Clear_Text.t2D描画(TJAPlayer3.app.Device, 750, y[i], new Rectangle(180, 0, 90, 90));
+										}
 									}
-								}
-								TJAPlayer3.Tx.End_Clear_Text.vc拡大縮小倍率.Y = 1.0f;
-								if (this.ct進行メイン.n現在の値 >= 21)
-								{
-									if (this.ct進行メイン.n現在の値 <= 40)
+									if (this.ct進行メイン.n現在の値 >= 23)
 									{
-										TJAPlayer3.Tx.End_Clear_Text.vc拡大縮小倍率.Y = f文字拡大率[this.ct進行メイン.n現在の値 - 21];
-										TJAPlayer3.Tx.End_Clear_Text.Opacity = n透明度[this.ct進行メイン.n現在の値 - 21];
-										TJAPlayer3.Tx.End_Clear_Text.t2D描画(TJAPlayer3.app.Device, 750, y[i] - (int)((90 * f文字拡大率[this.ct進行メイン.n現在の値 - 21]) - 90), new Rectangle(180, 0, 90, 90));
+										if (this.ct進行メイン.n現在の値 <= 42)
+										{
+											TJAPlayer3.Tx.End_Clear_Text.vc拡大縮小倍率.Y = f文字拡大率[this.ct進行メイン.n現在の値 - 23];
+											TJAPlayer3.Tx.End_Clear_Text.Opacity = n透明度[this.ct進行メイン.n現在の値 - 23];
+											TJAPlayer3.Tx.End_Clear_Text.t2D描画(TJAPlayer3.app.Device, 819, y[i] - (int)((90 * f文字拡大率[this.ct進行メイン.n現在の値 - 23]) - 90), new Rectangle(270, 0, 90, 90));
+										}
+										else
+										{
+											TJAPlayer3.Tx.End_Clear_Text.vc拡大縮小倍率.Y = 1.0f;
+											TJAPlayer3.Tx.End_Clear_Text.t2D描画(TJAPlayer3.app.Device, 819, y[i], new Rectangle(270, 0, 90, 90));
+										}
 									}
-									else
+									if (this.ct進行メイン.n現在の値 >= 25)
 									{
-										TJAPlayer3.Tx.End_Clear_Text.vc拡大縮小倍率.Y = 1.0f;
-										TJAPlayer3.Tx.End_Clear_Text.t2D描画(TJAPlayer3.app.Device, 750, y[i], new Rectangle(180, 0, 90, 90));
-									}
-								}
-								if (this.ct進行メイン.n現在の値 >= 23)
-								{
-									if (this.ct進行メイン.n現在の値 <= 42)
-									{
-										TJAPlayer3.Tx.End_Clear_Text.vc拡大縮小倍率.Y = f文字拡大率[this.ct進行メイン.n現在の値 - 23];
-										TJAPlayer3.Tx.End_Clear_Text.Opacity = n透明度[this.ct進行メイン.n現在の値 - 23];
-										TJAPlayer3.Tx.End_Clear_Text.t2D描画(TJAPlayer3.app.Device, 819, y[i] - (int)((90 * f文字拡大率[this.ct進行メイン.n現在の値 - 23]) - 90), new Rectangle(270, 0, 90, 90));
-									}
-									else
-									{
-										TJAPlayer3.Tx.End_Clear_Text.vc拡大縮小倍率.Y = 1.0f;
-										TJAPlayer3.Tx.End_Clear_Text.t2D描画(TJAPlayer3.app.Device, 819, y[i], new Rectangle(270, 0, 90, 90));
-									}
-								}
-								if (this.ct進行メイン.n現在の値 >= 25)
-								{
-									if (this.ct進行メイン.n現在の値 <= 44)
-									{
-										TJAPlayer3.Tx.End_Clear_Text.vc拡大縮小倍率.Y = f文字拡大率[this.ct進行メイン.n現在の値 - 25];
-										TJAPlayer3.Tx.End_Clear_Text.Opacity = n透明度[this.ct進行メイン.n現在の値 - 25];
-										TJAPlayer3.Tx.End_Clear_Text.t2D描画(TJAPlayer3.app.Device, 890, (y[i] + 2) - (int)((90 * f文字拡大率[this.ct進行メイン.n現在の値 - 25]) - 90), new Rectangle(360, 0, 90, 90));
-									}
-									else
-									{
-										TJAPlayer3.Tx.End_Clear_Text.vc拡大縮小倍率.Y = 1.0f;
-										TJAPlayer3.Tx.End_Clear_Text.t2D描画(TJAPlayer3.app.Device, 890, y[i] + 2, new Rectangle(360, 0, 90, 90));
-									}
-								}
+										if (this.ct進行メイン.n現在の値 <= 44)
+										{
+											TJAPlayer3.Tx.End_Clear_Text.vc拡大縮小倍率.Y = f文字拡大率[this.ct進行メイン.n現在の値 - 25];
+											TJAPlayer3.Tx.End_Clear_Text.Opacity = n透明度[this.ct進行メイン.n現在の値 - 25];
+											TJAPlayer3.Tx.End_Clear_Text.t2D描画(TJAPlayer3.app.Device, 890, (y[i] + 2) - (int)((90 * f文字拡大率[this.ct進行メイン.n現在の値 - 25]) - 90), new Rectangle(360, 0, 90, 90));
+										}
+										else
+										{
+											TJAPlayer3.Tx.End_Clear_Text.vc拡大縮小倍率.Y = 1.0f;
+											TJAPlayer3.Tx.End_Clear_Text.t2D描画(TJAPlayer3.app.Device, 890, y[i] + 2, new Rectangle(360, 0, 90, 90));
+										}
+									} */
 								if (this.ct進行メイン.n現在の値 >= 50 && this.ct進行メイン.n現在の値 < 90)
 								{
 									if (this.ct進行メイン.n現在の値 < 70)
@@ -221,7 +326,7 @@ namespace TJAPlayer3
 								}
 								#endregion
 								#region[ バチお ]
-								if (this.ct進行メイン.n現在の値 <= 11)
+								/*if (this.ct進行メイン.n現在の値 <= 11)
 								{
 									if (TJAPlayer3.Tx.End_Clear_L[1] != null)
 									{
@@ -248,10 +353,10 @@ namespace TJAPlayer3
 										//2016.07.16 kairera0467 またも原始的...
 										float[] fRet = new float[] { 1.0f, 0.99f, 0.98f, 0.97f, 0.96f, 0.95f, 0.96f, 0.97f, 0.98f, 0.99f, 1.0f };
 										TJAPlayer3.Tx.End_Clear_L[0].t2D描画(TJAPlayer3.app.Device, 466, y[i] - 30);
-										TJAPlayer3.Tx.End_Clear_L[0].vc拡大縮小倍率 = new Vector3(fRet[this.ct進行メイン.n現在の値 - 36], 1.0f, 1.0f);
+										TJAPlayer3.Tx.End_Clear_L[0].vc拡大縮小倍率 = new OpenTK.Vector3(fRet[this.ct進行メイン.n現在の値 - 36], 1.0f, 1.0f);
 										//CDTXMania.Tx.End_Clear_R[ 0 ].t2D描画( CDTXMania.app.Device, 956 + (( this.ct進行メイン.n現在の値 - 36 ) / 2), 180 );
 										TJAPlayer3.Tx.End_Clear_R[0].t2D描画(TJAPlayer3.app.Device, 1136 - 180 * fRet[this.ct進行メイン.n現在の値 - 36], y[i] - 30);
-										TJAPlayer3.Tx.End_Clear_R[0].vc拡大縮小倍率 = new Vector3(fRet[this.ct進行メイン.n現在の値 - 36], 1.0f, 1.0f);
+										TJAPlayer3.Tx.End_Clear_R[0].vc拡大縮小倍率 = new OpenTK.Vector3(fRet[this.ct進行メイン.n現在の値 - 36], 1.0f, 1.0f);
 									}
 								}
 								else if (this.ct進行メイン.n現在の値 <= 49)
@@ -281,7 +386,7 @@ namespace TJAPlayer3
 										TJAPlayer3.Tx.End_Clear_L[4].t2D描画(TJAPlayer3.app.Device, 466, y[i] - 30);
 									if (TJAPlayer3.Tx.End_Clear_R[4] != null)
 										TJAPlayer3.Tx.End_Clear_R[4].t2D描画(TJAPlayer3.app.Device, 956, y[i] - 30);
-								}
+								}*/
 								#endregion
 							}
 							break;
@@ -296,16 +401,16 @@ namespace TJAPlayer3
 				}
 
 
-
-				if (this.ct進行メイン.b終了値に達した)
-				{
-					if (!this.bリザルトボイス再生済み)
+				for (int i = 0; i < TJAPlayer3.ConfigIni.nPlayerCount; i++)
+					if (this.ct進行メイン.b終了値に達した)
 					{
-						TJAPlayer3.Skin.sound成績発表.t再生する();
-						this.bリザルトボイス再生済み = true;
+						if (!this.bリザルトボイス再生済み && (TJAPlayer3.stage演奏ドラム画面.actGauge.db現在のゲージ値[i] >= 80))
+						{
+							TJAPlayer3.Skin.sound成績発表.t再生する();
+							this.bリザルトボイス再生済み = true;
+						}
+						return 1;
 					}
-					return 1;
-				}
 			}
 
 			return 0;
@@ -321,6 +426,7 @@ namespace TJAPlayer3
 		//CTexture tx文字;
 		//CTexture tx文字マスク;
 		CSound soundClear;
+		CSound soundFailed;
 		EndMode[] Mode;
 		enum EndMode
 		{
